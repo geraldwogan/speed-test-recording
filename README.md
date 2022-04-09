@@ -5,7 +5,7 @@
 - Wait until speed test is finished
 - Save results to csv file.
     - Format: Datetime, Upload, Download
-- Crete .bat file to run .py file
+- Create .bat file to run .py file
 - Setup Task Scheduler task to run .bat file once a day.
 
 Notes:
