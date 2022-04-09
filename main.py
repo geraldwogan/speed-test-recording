@@ -9,13 +9,16 @@ driver =  webdriver.Chrome('chromedriver.exe')
 
 # Open webpage
 driver.get(link)
-
 # Wait for page to load
-time.sleep(5)
+time.sleep(.5)
 
 # Accept the cookie settings
-# e = driver.find_element(By.XPATH, '//button[contains(., "ACCEPT ALL"]')
 e = driver.find_element(By.XPATH, '//button[contains(., "I agree")]')
 e.click()
+time.sleep(.5)
 
-time.sleep(1)
+
+# Accept the cookie settings
+e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
+e.click()
+time.sleep(3)
