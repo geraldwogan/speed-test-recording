@@ -17,17 +17,16 @@ e = driver.find_element(By.XPATH, '//button[contains(., "I agree")]')
 e.click()
 time.sleep(.5)
 
-# # Click the 'Run Speed Test' button
-# e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
-# e.click()
-# time.sleep(35)
+# Click the 'Run Speed Test' button
+e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
+e.click()
+time.sleep(35) # Speed test generally takes about 30 seconds, may swithch to using EC.presence_of_all_elements_located
+# e = WebDriverWait(driver,40).until(EC.presence_of_all_elements_located((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
 
-# Get test text from p.B7A8m
-e = driver.find_element(By.CLASS_NAME,'B7A8m').text# 'sqiple')
-print('get test text -> ',e)
+# Get results of speed test
+speeds = driver.find_elements(By.CLASS_NAME,'spiqle')
+download = speeds[0].text
+upload = speeds[1].text
+print('d',download)
+print('u',upload)
 
-# Get results of speed test (TODO)
-# e = WebDriverWait(driver,50).until(EC.presence_of_all_elements_located((By.CLASS_NAME,'sqiple')))
-# # e = driver.find_element(By.CLASS_NAME,'sqiple')# 'sqiple')
-# for val in e:
-#     print('text -> ',val.text)
