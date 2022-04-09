@@ -7,3 +7,6 @@
     - Format: Datetime, Upload, Download
 - Crete .bat file to run .py file
 - Setup Task Scheduler task to run .bat file once a day.
+
+Notes:
+Might change to a speed test API in the future.
