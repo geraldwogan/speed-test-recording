@@ -22,8 +22,7 @@ def get_speed_test_results():
     # Click the 'Run Speed Test' button
     e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
     e.click()
-    time.sleep(35) # Speed test generally takes about 30 seconds, may swithch to using EC.presence_of_all_elements_located
-    # e = WebDriverWait(driver,40).until(EC.presence_of_all_elements_located((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
+    e = WebDriverWait(driver,40).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
 
     # Get results of speed test
     speeds = driver.find_elements(By.CLASS_NAME,'spiqle') # Returns a list like [download, upload]
