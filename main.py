@@ -1,4 +1,5 @@
 import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,33 +12,21 @@ def get_speed_test_results():
 
     # Open webpage
     driver.get('https://www.google.com/search?q=internet+speed+test')
-    # Wait for page to load
-    time.sleep(.5)
 
-    # Accept the cookie settings by clickin the 'I agree' button.
+    # Accept the cookie settings by clicking the 'I agree' button.
+    WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(., "I agree")]')))
     e = driver.find_element(By.XPATH, '//button[contains(., "I agree")]')
     e.click()
-    time.sleep(.5)
 
     # Click the 'Run Speed Test' button
+    WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')))
     e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
     e.click()
-    e = WebDriverWait(driver,40).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
 
     # Get results of speed test
-    speeds = driver.find_elements(By.CLASS_NAME,'spiqle') # Returns a list like [download, upload]
+    WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
+    speeds = driver.find_elements(By.CLASS_NAME,'spiqle') # Returns a list like [download_element, upload_element]
 
-    print(f'Returned info:\nType@ {type(speeds)}\nLength: {len(speeds)} \nValues:')
+    return speeds[0].text, speeds[1].text # download, upload
 
-    for v in speeds:
-        print(v)
-        print(v.text)
-
-    download = speeds[0].text
-    upload = speeds[1].text
-    print('d',download)
-    print('u',upload)
-
-    return download, upload
-
-get_speed_test_results()
+print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
