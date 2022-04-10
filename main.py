@@ -1,16 +1,15 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
 
 def get_speed_test_results():
 
-    # Selenium Web Driver specifically for chrome, download from here: https://chromedriver.chromium.org/downloads
-    driver = webdriver.Chrome('chromedriver.exe')
+    # Selenium Web Driver for chrome, download from here: https://chromedriver.chromium.org/downloads
+    driver = webdriver.Chrome(service=Service('chromedriver.exe'))
 
-    # Open webpage
+    # Open internet speed test webpage
     driver.get('https://www.google.com/search?q=internet+speed+test')
 
     # Accept the cookie settings by clicking the 'I agree' button.
