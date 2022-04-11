@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -28,4 +30,14 @@ def get_speed_test_results():
 
     return speeds[0].text, speeds[1].text # download, upload
 
-print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
+def record_results(speeds):
+
+    # Create record for .csv file. Format: Datetime, Download_MBPS, Upload_MBPS
+    record = f'\n{datetime.now()},{speeds[0]},{speeds[1]}'
+
+    # Append record to .csv file
+    with open('data/speed-test.csv', 'a') as f:
+        f.write(record)
+
+# print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
+record_results(get_speed_test_results())
