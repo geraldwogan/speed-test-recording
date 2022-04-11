@@ -39,5 +39,6 @@ def record_results(speeds):
     with open('data/speed-test.csv', 'a') as f:
         f.write(record)
 
+
 # print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
 record_results(get_speed_test_results())
