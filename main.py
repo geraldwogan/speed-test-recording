@@ -36,9 +36,8 @@ def record_results(speeds):
     record = f'\n{datetime.now()},{speeds[0]},{speeds[1]}'
 
     # Append record to .csv file
-    with open('data/speed-test.csv', 'a') as f:
+    with open('speed-test-recording/data/speed-test.csv', 'a') as f:
         f.write(record)
-
 
 # print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
 record_results(get_speed_test_results())
