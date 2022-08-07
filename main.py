@@ -1,3 +1,5 @@
+import logging
+
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -23,10 +25,12 @@ def get_speed_test_results():
     WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')))
     e = driver.find_element(By.XPATH, '//g-raised-button[contains(., "RUN SPEED TEST")]')
     e.click()
+    logging.info(' Speed test is running... Please wait as this may take up to 60 seconds to complete.')
 
     # Get results of speed test
     WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//g-raised-button[contains(., "TEST AGAIN")]')))
     speeds = driver.find_elements(By.CLASS_NAME,'spiqle') # Returns a list like [download_element, upload_element]
+    logging.info(f' Speed test complete. Results: Download MBPS = {speeds[0].text}, Upload MBPS = {speeds[1].text}.')
 
     return speeds[0].text, speeds[1].text # download, upload
 
@@ -41,5 +45,6 @@ def record_results(speeds):
 
 if __name__ == '__main__':
 
-    # print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
+    logging.basicConfig(level=logging.INFO)
+    # print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results())) # basic test case
     record_results(get_speed_test_results())
