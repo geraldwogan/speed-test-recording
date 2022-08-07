@@ -1,15 +1,15 @@
 from datetime import datetime
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 
 def get_speed_test_results():
 
     # Selenium Web Driver for chrome, download from here: https://chromedriver.chromium.org/downloads
-    driver = webdriver.Chrome(service=Service('chromedriver.exe'))
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     # Open internet speed test webpage
     driver.get('https://www.google.com/search?q=internet+speed+test')
@@ -39,5 +39,7 @@ def record_results(speeds):
     with open('speed-test-recording/data/speed-test.csv', 'a') as f:
         f.write(record)
 
-# print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
-record_results(get_speed_test_results())
+if __name__ == '__main__':
+
+    # print('---SPEEDS---\ndownload: {0[0]}\nupload: {0[1]}'.format(get_speed_test_results()))
+    record_results(get_speed_test_results())
