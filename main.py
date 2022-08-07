@@ -14,9 +14,9 @@ def get_speed_test_results():
     # Open internet speed test webpage
     driver.get('https://www.google.com/search?q=internet+speed+test')
 
-    # Accept the cookie settings by clicking the 'I agree' button.
-    WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(., "I agree")]')))
-    e = driver.find_element(By.XPATH, '//button[contains(., "I agree")]')
+    # Bypass the cookie settings by clicking the 'Reject all' button.
+    WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(., "Reject all")]')))
+    e = driver.find_element(By.XPATH, '//button[contains(., "Reject all")]')
     e.click()
 
     # Click the 'Run Speed Test' button
